@@ -19,7 +19,7 @@ function registerVuexNode(store) {
 
 	store.subscribe((mutation) => {
 		if (!mutation.payload || !mutation.payload.__IPC_MUTATION)
-			ipcRenderer.send(VUEX_MUTATION, mutation);
+			ipcRenderer.send(VUEX_MUTATION, [mutation, JSON.stringify(store.state.myCoins),JSON.stringify(store.state.settings), JSON.stringify(store.state.total),JSON.stringify(store.state.profitLoss)] );
 	});
 
 	ipcRenderer.on(VUEX_MUTATION, (event, mutation) => {
