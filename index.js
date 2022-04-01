@@ -21,13 +21,6 @@ function registerVuexNode(store) {
 		if (!mutation.payload || !mutation.payload.__IPC_MUTATION)
 			ipcRenderer.send(VUEX_MUTATION, [mutation, JSON.stringify(store.state.myCoins),JSON.stringify(store.state.settings), JSON.stringify(store.state.total),JSON.stringify(store.state.profitLoss)] );
 	});
-
-	ipcRenderer.on(VUEX_MUTATION, (event, mutation) => {
-		store.commit(mutation.type, {
-			...mutation.payload || [],
-			__IPC_MUTATION: true,
-		});
-	});
 }
 
 module.exports = {
